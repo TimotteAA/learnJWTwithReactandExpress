@@ -2,6 +2,15 @@
 
 前端采用 React，后端服务器使用 express.js
 
+# 步骤总结
+
+1.When you do log in, api sends 2 tokens (Access token, Refresh token) in response to the client.
+2.The access token will have less expiry time (may be 15min) and Refresh will have long expiry time (may be 7 or 60 days )
+3.The client (Front end) will store refresh token in his local storage and access token in cookies.
+4.The client will use an access token for calling APIs. But when it expires, pick the refresh token from local storage and call auth server API to get the new token.
+5.Your auth server will have an API exposed which will accept refresh token and checks for its validity and return a new access token.
+6.Once the refresh token is expired, the User will be logged out.
+
 # 使用 JWT 的原因
 
 由于 HTTP 服务器是无状态的协议，因此即使上一次 HTTP 请求是登录，下一次请求其他资源服务器也不记得你是谁，因此需要一种登录凭证。
